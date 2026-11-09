@@ -24,13 +24,13 @@
             <button class="button" type="submit">Filtra</button>
             @if($search || $date)<a class="text-link" href="{{ route('delivery-notes.index') }}">Azzera filtri</a>@endif
         </form>
-        <div class="table-scroll"><table><thead><tr><th>Data DDT</th><th>Documento</th><th>Produttore</th><th>PDF</th></tr></thead><tbody>
+        <div class="table-scroll"><table class="responsive-table" role="table"><thead><tr><th>Data DDT</th><th>Documento</th><th>Produttore</th><th>PDF</th></tr></thead><tbody>
         @forelse($deliveryNotes as $deliveryNote)
             <tr>
-                <td><strong>{{ $deliveryNote->document_date->format('d/m/Y') }}</strong><small>Caricato il {{ $deliveryNote->created_at->timezone('Europe/Rome')->format('d/m/Y · H:i') }}</small></td>
-                <td><strong>{{ $deliveryNote->document_number ?: 'DDT senza numero' }}</strong><small>{{ $deliveryNote->original_name }}</small><small>{{ number_format($deliveryNote->file_size / 1024, 0, ',', '.') }} KB</small></td>
-                <td>{{ $deliveryNote->producer ?: '—' }}</td>
-                <td><div class="ddt-actions"><a class="button small" href="{{ route('delivery-notes.show', $deliveryNote) }}" target="_blank" rel="noopener" aria-label="Apri PDF {{ $deliveryNote->document_number ?: $deliveryNote->original_name }}">Apri ↗</a><a class="text-link" href="{{ route('delivery-notes.download', $deliveryNote) }}" aria-label="Scarica PDF {{ $deliveryNote->document_number ?: $deliveryNote->original_name }}">Scarica ↓</a></div></td>
+                <td data-label="Data DDT"><strong>{{ $deliveryNote->document_date->format('d/m/Y') }}</strong><small>Caricato il {{ $deliveryNote->created_at->timezone('Europe/Rome')->format('d/m/Y · H:i') }}</small></td>
+                <td class="mobile-record-title" data-label="Documento"><strong>{{ $deliveryNote->document_number ?: 'DDT senza numero' }}</strong><small>{{ $deliveryNote->original_name }}</small><small>{{ number_format($deliveryNote->file_size / 1024, 0, ',', '.') }} KB</small></td>
+                <td data-label="Produttore">{{ $deliveryNote->producer ?: '—' }}</td>
+                <td class="mobile-record-actions" data-label="PDF"><div class="ddt-actions"><a class="button small" href="{{ route('delivery-notes.show', $deliveryNote) }}" target="_blank" rel="noopener" aria-label="Apri PDF {{ $deliveryNote->document_number ?: $deliveryNote->original_name }}">Apri ↗</a><a class="text-link" href="{{ route('delivery-notes.download', $deliveryNote) }}" aria-label="Scarica PDF {{ $deliveryNote->document_number ?: $deliveryNote->original_name }}">Scarica ↓</a></div></td>
             </tr>
         @empty
             <tr><td colspan="4"><div class="empty-state"><span>▧</span><h3>{{ $search || $date ? 'Nessun DDT trovato' : 'Un posto per ogni consegna' }}</h3><p>{{ $search || $date ? 'Prova a cambiare la data o i termini di ricerca.' : 'Carica il primo PDF del produttore. I documenti saranno raccolti qui, ordinati per data.' }}</p></div></td></tr>

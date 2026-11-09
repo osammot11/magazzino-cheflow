@@ -13,11 +13,11 @@
         <div class="workspace"><span class="workspace-icon">C</span><div><strong>Cheflow</strong><small>Gestione del magazzino</small></div></div>
         <div class="nav-label">WORKSPACE</div>
         <nav aria-label="Menu principale">
-            <a class="{{ request()->routeIs('dashboard') ? 'selected' : '' }}" href="{{ route('dashboard') }}"><span>◫</span> Panoramica</a>
-            <a class="{{ request()->routeIs('products.*') ? 'selected' : '' }}" href="{{ route('products.index') }}"><span>▣</span> Prodotti</a>
-            <a class="{{ request()->routeIs('inventory.*') ? 'selected' : '' }}" href="{{ route('inventory.index') }}"><span>▤</span> Inventario</a>
-            <a class="{{ request()->routeIs('movements.*') ? 'selected' : '' }}" href="{{ route('movements.index') }}"><span>⇄</span> Movimenti</a>
-            <a class="{{ request()->routeIs('delivery-notes.*') ? 'selected' : '' }}" href="{{ route('delivery-notes.index') }}"><span>▧</span> DDT produttore</a>
+            <a class="{{ request()->routeIs('dashboard') ? 'selected' : '' }}" href="{{ route('dashboard') }}"><span class="nav-icon" aria-hidden="true">◫</span><span class="nav-text">Panoramica</span></a>
+            <a class="{{ request()->routeIs('products.*') ? 'selected' : '' }}" href="{{ route('products.index') }}"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-text">Prodotti</span></a>
+            <a class="{{ request()->routeIs('inventory.*') ? 'selected' : '' }}" href="{{ route('inventory.index') }}"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-text">Inventario</span></a>
+            <a class="{{ request()->routeIs('movements.*') ? 'selected' : '' }}" href="{{ route('movements.index') }}"><span class="nav-icon" aria-hidden="true">⇄</span><span class="nav-text">Movimenti</span></a>
+            <a class="{{ request()->routeIs('delivery-notes.*') ? 'selected' : '' }}" href="{{ route('delivery-notes.index') }}"><span class="nav-icon" aria-hidden="true">▧</span><span class="nav-text nav-desktop-label">DDT produttore</span><span class="nav-text nav-mobile-label">DDT</span></a>
         </nav>
         <div class="sidebar-note"><span class="online-dot"></span> Tutto sotto controllo<p>Prodotti, scorte e movimenti.<br>Un unico posto per gestirli.</p></div>
         <div class="sidebar-bottom"><span class="avatar">CF</span><div><strong>Magazzino principale</strong><small>Archivio SQLite</small></div></div>
