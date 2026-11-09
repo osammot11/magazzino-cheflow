@@ -5,11 +5,20 @@ namespace Tests\Feature;
 use App\Models\StockMovement;
 use App\Models\Variant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class InventoryTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $hash = Hash::make('test-password');
+        config(['access.password_hash' => $hash]);
+        $this->withSession(['warehouse_access' => hash('sha256', $hash)]);
+    }
 
     private function payload(array $variant = []): array
     {

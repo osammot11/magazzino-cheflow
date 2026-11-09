@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-<header class="topbar"><a class="brand" href="{{ route('dashboard') }}"><span class="brand-mark">c<span>↗</span></span>cheflow<span class="brand-divider"></span><span class="brand-sub">Magazzino</span></a><span class="workspace-label"><span class="online-dot"></span> Workspace locale</span></header>
+<header class="topbar"><a class="brand" href="{{ route('dashboard') }}"><span class="brand-mark">c<span>↗</span></span>cheflow<span class="brand-divider"></span><span class="brand-sub">Magazzino</span></a><form method="post" action="{{ route('access.logout') }}">@csrf<button type="submit" class="button small">Esci ↗</button></form></header>
 <div class="app-shell">
     <aside class="sidebar">
         <div class="workspace"><span class="workspace-icon">C</span><div><strong>Cheflow</strong><small>Gestione del magazzino</small></div></div>

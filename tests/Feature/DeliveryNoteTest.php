@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\DeliveryNote;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\TestWith;
 use Tests\TestCase;
@@ -12,6 +13,14 @@ use Tests\TestCase;
 class DeliveryNoteTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $hash = Hash::make('test-password');
+        config(['access.password_hash' => $hash]);
+        $this->withSession(['warehouse_access' => hash('sha256', $hash)]);
+    }
 
     public function test_archive_shows_upload_form_and_empty_state(): void
     {
