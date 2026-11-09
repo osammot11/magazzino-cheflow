@@ -1,0 +1,10 @@
+@extends('layouts.app')
+@section('title', 'Inventario')
+@section('content')
+<div class="page-heading"><div><div class="eyebrow">DISPONIBILITÀ IN TEMPO REALE</div><h1>Inventario</h1><p>Controlla le quantità disponibili per ogni variante del catalogo attivo.</p></div><a class="button primary" href="{{ route('movements.create') }}">＋ Registra movimento</a></div>
+<section class="card"><form class="toolbar" method="get"><label class="search-field"><span>⌕</span><input name="q" value="{{ $search }}" placeholder="Cerca prodotto, variante o SKU…" aria-label="Cerca inventario"></label><select name="stock" aria-label="Filtra disponibilità"><option value="all">Tutte le scorte</option><option value="low" @selected($filter==='low')>Sotto soglia</option><option value="out" @selected($filter==='out')>Esaurite</option></select><button class="button">Filtra</button></form>
+<div class="table-scroll"><table><thead><tr><th>Prodotto / Variante</th><th>SKU</th><th>Prezzo</th><th>Soglia minima</th><th>Disponibili</th><th></th></tr></thead><tbody>
+@forelse($variants as $variant)<tr><td><a class="product-cell" href="{{ route('products.edit',$variant->product) }}"><span class="product-placeholder">▣</span><div><strong>{{ $variant->product->name }}</strong><small>{{ $variant->name }}</small></div></a></td><td class="sku">{{ $variant->sku }}</td><td>€ {{ number_format($variant->price_cents/100,2,',','.') }}</td><td>{{ $variant->low_stock_threshold }}</td><td><span class="badge {{ $variant->quantity===0 ? 'danger' : ($variant->quantity <= $variant->low_stock_threshold ? 'warning' : 'green') }}">{{ $variant->quantity }} {{ $variant->quantity===0 ? '· Esaurito' : '' }}</span></td><td><a class="button small" href="{{ route('movements.create',['variant'=>$variant->id]) }}">⇄ Movimenta</a></td></tr>
+@empty<tr><td colspan="6"><div class="empty-state"><span>▤</span><h3>Nessuna variante trovata</h3><p>Aggiungi un prodotto o modifica i filtri di ricerca.</p><a class="text-link" href="{{ route('products.create') }}">Aggiungi prodotto →</a></div></td></tr>@endforelse
+</tbody></table></div><div class="pagination">{{ $variants->links() }}</div></section>
+@endsection
